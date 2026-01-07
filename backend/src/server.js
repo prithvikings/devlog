@@ -1,10 +1,9 @@
 import "dotenv/config";
 import express from "express";
-import cors from "cors";
 import session from "express-session";
-import passport from "passport"; // Import the library
+import passport from "passport";
 import connectDB from "./config/db.js";
-import configurePassport from "./config/passport.js"; // Import our function
+import configurePassport from "./config/passport.js";
 import authRoutes from "./routes/authRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 
@@ -13,48 +12,60 @@ connectDB();
 
 const app = express();
 
-// ... (Your CORS and Express JSON middleware stays here) ...
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
-    credentials: true,
-  })
-);
+// ==========================================
+// 1. MANUAL CORS MIDDLEWARE (The "Hammer")
+// ==========================================
+// We are manually setting the headers to ensure they are 100% correct.
+app.use((req, res, next) => {
+  // Allow ONLY the frontend URL
+  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  // Allow Cookies
+  res.header("Access-Control-Allow-Credentials", "true");
+  // Allow Methods
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  // Allow Headers
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  // Handle Preflight (OPTIONS) requests immediately
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
+// 2. Body Parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ... (Your Session middleware stays here) ...
+// 3. Session Middleware
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "dev_secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === "production",
+      secure: false, // Always false for localhost
       maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
     },
   })
 );
 
-// --- PASSPORT SETUP (UPDATED) ---
-// 1. Configure the strategy explicitly
+// 4. Passport Middleware
 configurePassport(passport);
-
-// 2. Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
+// 5. Routes
 app.get("/", (req, res) => {
-  res.send("Hello from devlog");
+  res.send("DevLog API (Manual Headers) is running...");
 });
-
-// Routes
 app.use("/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 
-// ... (Rest of the file) ...
-const PORT = process.env.PORT || 3000;
-
+// 6. Start Server
+const PORT = 8002; // Hardcoded to match your frontend API config
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`Manual CORS Headers Active for: http://localhost:5173`);
 });

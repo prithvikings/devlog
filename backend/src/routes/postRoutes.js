@@ -1,3 +1,5 @@
+//src/routes/postRoutes.js
+
 import express from "express";
 import { getUserActivity, createPost } from "../controllers/postController.js"; // Import createPost
 
