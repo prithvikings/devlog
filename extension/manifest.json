@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Project Dashboard Connect",
+  "version": "1.0",
+  "description": "Quickly create posts without opening the dashboard.",
+  "host_permissions": ["http://localhost:8002/*"],
+  "permissions": ["cookies"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

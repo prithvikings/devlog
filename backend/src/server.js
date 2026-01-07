@@ -15,10 +15,24 @@ const app = express();
 // ==========================================
 // 1. MANUAL CORS MIDDLEWARE (The "Hammer")
 // ==========================================
-// We are manually setting the headers to ensure they are 100% correct.
+// ==========================================
+// 1. SMART MANUAL CORS MIDDLEWARE
+// ==========================================
 app.use((req, res, next) => {
-  // Allow ONLY the frontend URL
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  const origin = req.headers.origin;
+
+  // Define who is allowed to talk to the server
+  const allowedOrigins = [
+    "http://localhost:5173", // Your Frontend
+    "chrome-extension://gbbpmhbollojfkenpkdbpbafcgnkneei",
+  ];
+
+  // If the request comes from an allowed origin, set the header to THAT specific origin.
+  // We cannot use '*' when Access-Control-Allow-Credentials is true.
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+
   // Allow Cookies
   res.header("Access-Control-Allow-Credentials", "true");
   // Allow Methods
@@ -26,7 +40,7 @@ app.use((req, res, next) => {
   // Allow Headers
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-  // Handle Preflight (OPTIONS) requests immediately
+  // Handle Preflight (OPTIONS)
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
   }
