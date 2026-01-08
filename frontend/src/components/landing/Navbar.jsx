@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { ThemeToggle } from "./Themetoggle";
 import { useAuth } from "../../context/AuthContext";
-import { CodeXmlIcon, Menu, X } from "lucide-react";
+import { Terminal, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 const Navbar = () => {
@@ -26,11 +26,11 @@ const Navbar = () => {
 
   return (
     // Added sticky positioning and backdrop blur for a modern feel
-    <nav className="sticky top-0 z-50 w-full border-b border-transparent bg-zinc-100/80 backdrop-blur-md dark:bg-zinc-950/80 transition-colors">
+    <nav className="w-full border-b border-transparent bg-zinc-100/80 backdrop-blur-xs dark:bg-zinc-950/80 transition-colors">
       <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
         {/* LOGO */}
         <div className="flex items-center gap-2 justify-center z-50">
-          <CodeXmlIcon className="w-6 h-6 text-zinc-900 dark:text-white" />
+          <Terminal className="w-6 h-6 text-zinc-900 dark:text-white" />
           <h1 className="font-poppins text-xl font-medium text-zinc-900 dark:text-white">
             DevPostGen
           </h1>

@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Github,
   Terminal,
@@ -86,17 +86,27 @@ const Hero = () => {
           </span>
         </motion.div>
 
-        <h1 className="text-5xl md:text-7xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-6">
+        <motion.h1
+          initial={{ opacity: 0, filter: "blur(4px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.5 }}
+          className="text-5xl md:text-7xl font-poppins tracking-tighter text-zinc-900 dark:text-white mb-6"
+        >
           Code to content. <br />
           <span className="text-zinc-500 dark:text-zinc-600">
             Zero friction.
           </span>
-        </h1>
+        </motion.h1>
 
-        <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed mb-10">
+        <motion.p
+          initial={{ opacity: 0, filter: "blur(4px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1 }}
+          className="text-sm text-zinc-600 dark:text-zinc-400 max-w-md mx-auto leading-relaxed mb-10"
+        >
           Turn your daily engineering work into accurate, humble updates.
           Designed for developers who hate marketing.
-        </p>
+        </motion.p>
 
         <button
           onClick={login}
@@ -111,9 +121,7 @@ const Hero = () => {
           Continue with GitHub
         </button>
 
-        <p className="mt-4 text-[10px] text-zinc-500 uppercase tracking-widest font-medium">
-          Read-only • Open Source
-        </p>
+        <p className="mt-4 text-xs text-zinc-500">Read-only • Open Source</p>
       </div>
     </Section>
   ); // CLOSE PARENTHESIS HERE
@@ -182,7 +190,7 @@ const Audience = () => {
             Works best for
           </h3>
 
-          <ul className="space-y-3 text-sm text-zinc-600 dark:text-zinc-500 leading-relaxed">
+          <ul className="space-y-3 text-xs text-zinc-600 dark:text-zinc-500 leading-relaxed font-poppins">
             <li>• Developers who ship code consistently</li>
             <li>• Engineers who dislike self-promotion</li>
             <li>• People who prefer facts over framing</li>
@@ -197,7 +205,7 @@ const Audience = () => {
             Probably not for
           </h3>
 
-          <ul className="space-y-3 text-sm text-zinc-600 dark:text-zinc-500 leading-relaxed">
+          <ul className="space-y-3 text-xs text-zinc-600 dark:text-zinc-500 leading-relaxed font-poppins">
             <li>• Influencer-style personal brands</li>
             <li>• Engagement-driven posting strategies</li>
             <li>• Emoji-heavy announcement threads</li>
@@ -251,7 +259,9 @@ const Features = () => {
             <h3 className="text-base font-medium text-zinc-900 dark:text-zinc-200 mb-2">
               {f.title}
             </h3>
-            <p className="text-sm text-zinc-600 dark:text-zinc-500">{f.desc}</p>
+            <p className="text-xs leading-relaxed font-poppins text-zinc-600 dark:text-zinc-500">
+              {f.desc}
+            </p>
           </Card>
         ))}
       </div>
@@ -302,17 +312,17 @@ const MinimalDemo = () => (
         {/* Output */}
         <div className="relative bg-zinc-50 dark:bg-[#0A0A0A] border border-zinc-300 dark:border-white/10 p-6 rounded-lg">
           <div className="flex justify-between mb-3">
-            <span className="text-[10px] uppercase tracking-widest text-zinc-500">
-              Preview
-            </span>
+            <span className="text-sm font-poppins text-zinc-500">Preview</span>
             <Copy className="w-3 h-3 text-zinc-500 hover:text-zinc-900 dark:hover:text-white cursor-pointer" />
           </div>
 
-          <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
-            Productive day shipping UI & fixes.
+          <p className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
+            <span className="font-semibold">
+              Productive day shipping UI & fixes.
+            </span>
             <br />
-            <br />• Fixed auth race condition • Shipped dark mode • Solved
-            LeetCode arrays
+            <br />• Fixed auth race condition <br />• Shipped dark mode <br />•
+            Solved LeetCode arrays
           </p>
         </div>
       </div>

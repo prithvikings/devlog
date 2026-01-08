@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    leetcodeUsername: {
+      type: String,
+      default: null, // User needs to set this manually once
+    },
     avatarUrl: String,
     accessToken: String, // We need this to fetch their repos later
     lastLogin: {

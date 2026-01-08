@@ -1,11 +1,19 @@
-//src/routes/postRoutes.js
-
 import express from "express";
-import { getUserActivity, createPost } from "../controllers/postController.js"; // Import createPost
+import {
+  getUserActivity,
+  createPost,
+  getLeetCodeStats, // <--- Import
+  setLeetCodeUser, // <--- Import
+} from "../controllers/postController.js";
 
 const router = express.Router();
 
-router.get("/activity", getUserActivity);
-router.post("/generate", createPost); // <--- Add this
+router.get("/activity", getUserActivity); // Existing GitHub logic
+router.post("/generate", createPost);
+
+// --- NEW LEETCODE ROUTES ---
+router.get("/leetcode", getLeetCodeStats);
+router.post("/leetcode/user", setLeetCodeUser); // Call this from frontend settings
+// ---------------------------
 
 export default router;
