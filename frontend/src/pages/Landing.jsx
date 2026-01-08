@@ -11,7 +11,8 @@ import {
   Cpu,
 } from "lucide-react";
 import Navbar from "../components/landing/Navbar";
-
+import { useAuth } from "../context/AuthContext";
+import { Navigate } from "react-router-dom";
 /* -----------------------------
 CARD (theme-correct)
 ------------------------------ */
@@ -63,54 +64,60 @@ const Badge = ({ children }) => (
 /* -----------------------------
    HERO
 ------------------------------ */
-const Hero = ({ onLogin }) => (
-  <Section className="pt-24 pb-12">
-    <div className="flex flex-col items-center text-center">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="
+const Hero = () => {
+  const { user, loading, login } = useAuth();
+
+  // ADD "return (" HERE
+  return (
+    <Section className="pt-24 pb-12">
+      <div className="flex flex-col items-center text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="
           mb-8 inline-flex items-center gap-2 px-3 py-1 rounded-full
           border border-zinc-200 bg-zinc-50
           dark:border-white/5 dark:bg-white/[0.02]
         "
-      >
-        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        <span className="text-xs text-zinc-600 dark:text-zinc-500 font-medium">
-          V1.0 Now Public
-        </span>
-      </motion.div>
+        >
+          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-xs text-zinc-600 dark:text-zinc-500 font-medium">
+            V1.0 Now Public
+          </span>
+        </motion.div>
 
-      <h1 className="text-5xl md:text-7xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-6">
-        Code to content. <br />
-        <span className="text-zinc-500 dark:text-zinc-600">Zero friction.</span>
-      </h1>
+        <h1 className="text-5xl md:text-7xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-6">
+          Code to content. <br />
+          <span className="text-zinc-500 dark:text-zinc-600">
+            Zero friction.
+          </span>
+        </h1>
 
-      <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed mb-10">
-        Turn your daily engineering work into accurate, humble updates. Designed
-        for developers who hate marketing.
-      </p>
+        <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed mb-10">
+          Turn your daily engineering work into accurate, humble updates.
+          Designed for developers who hate marketing.
+        </p>
 
-      <button
-        onClick={onLogin}
-        className="
+        <button
+          onClick={login}
+          className="
           h-10 px-6 rounded text-sm font-medium flex items-center gap-2
           bg-zinc-900 text-white hover:bg-zinc-800
           dark:bg-white dark:text-black dark:hover:bg-zinc-200
           transition-colors
         "
-      >
-        <Github className="w-4 h-4" />
-        Continue with GitHub
-      </button>
+        >
+          <Github className="w-4 h-4" />
+          Continue with GitHub
+        </button>
 
-      <p className="mt-4 text-[10px] text-zinc-500 uppercase tracking-widest font-medium">
-        Read-only • Open Source
-      </p>
-    </div>
-  </Section>
-);
-
+        <p className="mt-4 text-[10px] text-zinc-500 uppercase tracking-widest font-medium">
+          Read-only • Open Source
+        </p>
+      </div>
+    </Section>
+  ); // CLOSE PARENTHESIS HERE
+};
 /* -----------------------------
    INTEGRATIONS
 ------------------------------ */
@@ -317,6 +324,9 @@ const MinimalDemo = () => (
    PAGE
 ------------------------------ */
 export default function LandingPage() {
+  const { user, loading, login } = useAuth();
+  if (loading) return null; // Or a minimal spinner
+  if (user) return <Navigate to="/dashboard" replace />;
   return (
     <div
       className="
