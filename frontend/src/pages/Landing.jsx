@@ -10,11 +10,12 @@ import {
   Code2,
   Cpu,
 } from "lucide-react";
-import Navbar from "../components/landing/Navbar";
+import Navbar from "../components/landing/Navbar"; // Adjust path if needed
 import { useAuth } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
+
 /* -----------------------------
-CARD (theme-correct)
+   CARD 
 ------------------------------ */
 const Card = ({ children, className = "" }) => {
   return (
@@ -34,19 +35,20 @@ const Card = ({ children, className = "" }) => {
 };
 
 /* -----------------------------
-   SECTION
+   SECTION (UPDATED FOR SMOOTH SCROLL OFFSET)
 ------------------------------ */
 const Section = ({ children, className = "", id = "" }) => (
   <section
     id={id}
-    className={`relative z-10 max-w-5xl mx-auto px-6 py-20 ${className}`}
+    // Added 'scroll-mt-28': This creates the buffer for the fixed navbar
+    className={`relative z-10 max-w-5xl mx-auto px-6 py-20 scroll-mt-24 ${className}`}
   >
     {children}
   </section>
 );
 
 /* -----------------------------
-   BADGE (fixed)
+   BADGE 
 ------------------------------ */
 const Badge = ({ children }) => (
   <span
@@ -65,11 +67,10 @@ const Badge = ({ children }) => (
    HERO
 ------------------------------ */
 const Hero = () => {
-  const { user, loading, login } = useAuth();
+  const { login } = useAuth();
 
-  // ADD "return (" HERE
   return (
-    <Section className="pt-24 pb-12">
+    <Section className="pt-32 pb-12">
       <div className="flex flex-col items-center text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -111,21 +112,38 @@ const Hero = () => {
         <button
           onClick={login}
           className="
-          h-10 px-6 rounded text-sm font-medium flex items-center gap-2
-          bg-zinc-900 text-white hover:bg-zinc-800
-          dark:bg-white dark:text-black dark:hover:bg-zinc-200
-          transition-colors
-        "
+    group relative flex h-10 items-center gap-2 overflow-hidden rounded-md px-6 
+    text-sm font-medium transition-all duration-200 ease-out
+    
+    /* LIGHT MODE: High Contrast Zinc */
+    bg-zinc-900 text-zinc-50 border border-zinc-800
+    hover:bg-zinc-800 hover:border-zinc-700
+    
+    /* DARK MODE: White/Light Gray */
+    dark:bg-zinc-50 dark:text-zinc-900 dark:border-white
+    dark:hover:bg-zinc-200
+    
+    /* THE 'LINEAR' LIP: Inner highlights for 3D feel without gradient bloat */
+    shadow-[0px_1px_0px_0px_rgba(255,255,255,0.15)_inset,0px_-1px_0px_0px_rgba(0,0,0,0.2)_inset]
+    dark:shadow-[0px_-1px_0px_0px_rgba(0,0,0,0.1)_inset]
+
+    /* INTERACTION */
+    active:scale-95 active:shadow-none
+    cursor-pointer
+  "
         >
-          <Github className="w-4 h-4" />
-          Continue with GitHub
+          {/* Icon with slight opacity shift on hover */}
+          <Github className="w-4 h-4 text-zinc-400 transition-colors group-hover:text-white dark:text-zinc-500 dark:group-hover:text-black" />
+
+          <span className="relative z-10">Continue with GitHub</span>
         </button>
 
         <p className="mt-4 text-xs text-zinc-500">Read-only • Open Source</p>
       </div>
     </Section>
-  ); // CLOSE PARENTHESIS HERE
+  );
 };
+
 /* -----------------------------
    INTEGRATIONS
 ------------------------------ */
@@ -168,7 +186,7 @@ const Integrations = () => {
 };
 
 /* -----------------------------
-   WHO IT'S FOR / NOT FOR
+   AUDIENCE
 ------------------------------ */
 const Audience = () => {
   return (
@@ -189,7 +207,6 @@ const Audience = () => {
           <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-200 mb-4">
             Works best for
           </h3>
-
           <ul className="space-y-3 text-xs text-zinc-600 dark:text-zinc-500 leading-relaxed font-poppins">
             <li>• Developers who ship code consistently</li>
             <li>• Engineers who dislike self-promotion</li>
@@ -204,7 +221,6 @@ const Audience = () => {
           <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-200 mb-4">
             Probably not for
           </h3>
-
           <ul className="space-y-3 text-xs text-zinc-600 dark:text-zinc-500 leading-relaxed font-poppins">
             <li>• Influencer-style personal brands</li>
             <li>• Engagement-driven posting strategies</li>
@@ -241,7 +257,7 @@ const Features = () => {
   ];
 
   return (
-    <Section>
+    <Section id="features">
       <div className="max-w-3xl mb-8">
         <h2 className="text-xl md:text-3xl tracking-tighter text-zinc-900 dark:text-white mb-3">
           Features
@@ -273,7 +289,7 @@ const Features = () => {
    MINIMAL DEMO
 ------------------------------ */
 const MinimalDemo = () => (
-  <Section className="py-10">
+  <Section className="py-10" id="demo">
     <div className="max-w-3xl mb-8">
       <h2 className="text-xl md:text-3xl tracking-tighter text-zinc-900 dark:text-white mb-3">
         How it Works
@@ -335,8 +351,9 @@ const MinimalDemo = () => (
 ------------------------------ */
 export default function LandingPage() {
   const { user, loading, login } = useAuth();
-  if (loading) return null; // Or a minimal spinner
+  if (loading) return null;
   if (user) return <Navigate to="/dashboard" replace />;
+
   return (
     <div
       className="
@@ -347,7 +364,7 @@ export default function LandingPage() {
     "
     >
       <Navbar />
-      <Hero onLogin={() => console.log("Login")} />
+      <Hero />
       <Integrations />
       <MinimalDemo />
       <Features />
