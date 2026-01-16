@@ -15,6 +15,7 @@ const Navbar = () => {
     { name: "Features", path: "#features" },
     { name: "Integration", path: "#integrations" },
     { name: "How it works", path: "#demo" },
+    { name: "Extension", path: "#extension" },
   ];
 
   // --- THE "SLOW GLIDE" ENGINE ---
@@ -97,7 +98,7 @@ const Navbar = () => {
         {/* LOGO */}
         <button
           onClick={scrollToTop}
-          className="flex items-center gap-2 justify-center z-50 focus:outline-none"
+          className="flex items-center gap-2 justify-center z-50 focus:outline-none cursor-pointer"
         >
           <Terminal className="w-6 h-6 text-zinc-900 dark:text-white" />
           <h1 className="font-poppins text-xl font-medium text-zinc-900 dark:text-white">
@@ -146,7 +147,7 @@ const Navbar = () => {
 
     /* INTERACTION: Tactile Press */
     active:scale-95 active:shadow-none
-    cursor-pointer
+    cursor-pointer hidden md:block
   "
           >
             <span className="relative z-10">Get started</span>
