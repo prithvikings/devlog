@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "sans-serif";
+  --color-background: #020617; /* Slate-950 */
+  --color-surface: #0f172a; /* Slate-900 */
+}

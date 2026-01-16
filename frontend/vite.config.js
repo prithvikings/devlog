@@ -11,7 +11,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // PROXY CONFIGURATION (The Fix)
+  // PROXY CONFIGURATION
   server: {
     proxy: {
       "/auth": {
@@ -23,6 +23,21 @@ export default defineConfig({
         target: "http://localhost:8002",
         changeOrigin: true,
         secure: false,
+      },
+    },
+  },
+  // OPTIMIZATION CONFIGURATION
+  build: {
+    // Esbuild is 20-40x faster than terser for minification
+    minify: "esbuild",
+    rollupOptions: {
+      output: {
+        // Separate vendor libraries from app code for better caching
+        manualChunks: (id) => {
+          if (id.includes("node_modules")) {
+            return "vendor";
+          }
+        },
       },
     },
   },
