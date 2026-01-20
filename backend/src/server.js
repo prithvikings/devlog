@@ -9,21 +9,15 @@ import postRoutes from "./routes/postRoutes.js";
 
 // Connect Database
 connectDB();
+const PORT = process.env.PORT || 8002;
 
 const app = express();
-
-// ==========================================
-// 1. MANUAL CORS MIDDLEWARE (The "Hammer")
-// ==========================================
-// ==========================================
-// 1. SMART MANUAL CORS MIDDLEWARE
-// ==========================================
 app.use((req, res, next) => {
   const origin = req.headers.origin;
 
   // Define who is allowed to talk to the server
   const allowedOrigins = [
-    "http://localhost:5173", // Your Frontend
+    process.env.CLIENT_URL || "http://localhost:5173", // Your Frontend
     "chrome-extension://gbbpmhbollojfkenpkdbpbafcgnkneei",
   ];
 
@@ -78,8 +72,7 @@ app.use("/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 
 // 6. Start Server
-const PORT = 8002; // Hardcoded to match your frontend API config
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Manual CORS Headers Active for: http://localhost:5173`);
+  console.log(`Manual CORS Headers Active for: ${process.env.CLIENT_URL}`);
 });
