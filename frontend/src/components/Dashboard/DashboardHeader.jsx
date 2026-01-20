@@ -1,6 +1,6 @@
 import { Terminal, LogOut } from "lucide-react";
 // Change this import if needed for your ThemeToggle location
-import { ThemeToggle } from "../Landing/Themetoggle";
+import { ThemeToggle } from "../landing/Themetoggle";
 
 export default function DashboardHeader({ user, logout }) {
   return (
