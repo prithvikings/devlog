@@ -12,29 +12,29 @@ connectDB();
 const PORT = process.env.PORT || 8002;
 
 const app = express();
+
+// --- FIX 1: Trust Proxy ---
+// Required for Render/Heroku/Vercel so 'secure: true' cookies work correctly
+app.set("trust proxy", 1);
+
 app.use((req, res, next) => {
   const origin = req.headers.origin;
 
-  // Define who is allowed to talk to the server
+  // Define allowed origins
   const allowedOrigins = [
-    process.env.CLIENT_URL || "http://localhost:5173", // Your Frontend
+    process.env.CLIENT_URL, // e.g., https://dev-post-gen.vercel.app
+    "http://localhost:5173", // Always allow local dev
     "chrome-extension://gbbpmhbollojfkenpkdbpbafcgnkneei",
   ];
 
-  // If the request comes from an allowed origin, set the header to THAT specific origin.
-  // We cannot use '*' when Access-Control-Allow-Credentials is true.
   if (allowedOrigins.includes(origin)) {
     res.header("Access-Control-Allow-Origin", origin);
   }
 
-  // Allow Cookies
   res.header("Access-Control-Allow-Credentials", "true");
-  // Allow Methods
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  // Allow Headers
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-  // Handle Preflight (OPTIONS)
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
   }
@@ -45,14 +45,17 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 3. Session Middleware
+// --- FIX 2: Session Configuration ---
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "dev_secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: false, // Always false for localhost
+      // Secure is TRUE in production (HTTPS), FALSE in dev (HTTP)
+      secure: process.env.NODE_ENV === "production",
+      // SameSite must be 'none' to allow cross-site cookies (Vercel <-> Render)
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
     },
@@ -66,7 +69,7 @@ app.use(passport.session());
 
 // 5. Routes
 app.get("/", (req, res) => {
-  res.send("DevPostGen API (Manual Headers) is running...");
+  res.send("DevPostGen API is running...");
 });
 app.use("/auth", authRoutes);
 app.use("/api/posts", postRoutes);
@@ -74,5 +77,4 @@ app.use("/api/posts", postRoutes);
 // 6. Start Server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Manual CORS Headers Active for: ${process.env.CLIENT_URL}`);
 });

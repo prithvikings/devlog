@@ -16,7 +16,13 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = () => {
-    window.location.href = "/auth/github";
+    // 1. Get the backend URL from environment variables
+    // Use the same logic as your api.js or fallback to localhost for dev
+    const backendUrl =
+      import.meta.env.VITE_BACKEND_BASE || "http://localhost:8002";
+
+    // 2. Redirect to the full URL
+    window.location.href = `${backendUrl}/auth/github`;
   };
 
   const logout = async () => {
