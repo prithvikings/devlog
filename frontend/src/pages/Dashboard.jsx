@@ -3,18 +3,18 @@ import { useAuth } from "../context/AuthContext";
 import api from "../api";
 
 // Sub-components
-import DashboardHeader from "../components/dashboard/DashboardHeader";
-import ActivityLog from "../components/dashboard/ActivityLog";
-import ControlPanel from "../components/dashboard/ControlPanel";
+import DashboardHeader from "../components/Dashboard/DashboardHeader";
+import ActivityLog from "../components/Dashboard/ActivityLog";
+import ControlPanel from "../components/Dashboard/ControlPanel";
 import {
   TwitterPreview,
   LinkedInPreview,
-} from "../components/dashboard/SocialCards";
+} from "../components/Dashboard/SocialCards";
 import {
   CircularProgress,
   CopyButton,
   globalStyles,
-} from "../components/dashboard/Shared";
+} from "../components/Dashboard/Shared";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
