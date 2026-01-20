@@ -1,15 +1,15 @@
 import { useAuth } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
 import Navbar from "../components/landing/Navbar";
-import Hero from "../components/landing/Hero";
-import Integrations from "../components/landing/Integration";
-import MinimalDemo from "../components/landing/MinimalDemo";
-import ExtensionCTA from "../components/landing/ExtensionCTA";
-import InstallationSteps from "../components/landing/InstallationSteps";
-import Features from "../components/landing/Features";
-import Audience from "../components/landing/Audience";
-import FAQ from "../components/landing/FAQ";
-import Footer from "../components/landing/Footer";
+import Hero from "../components/Landing/Hero";
+import Integrations from "../components/Landing/Integration";
+import MinimalDemo from "../components/Landing/MinimalDemo";
+import ExtensionCTA from "../components/Landing/ExtensionCTA";
+import InstallationSteps from "../components/Landing/InstallationSteps";
+import Features from "../components/Landing/Features";
+import Audience from "../components/Landing/Audience";
+import FAQ from "../components/Landing/FAQ";
+import Footer from "../components/Landing/Footer";
 
 export default function LandingPage() {
   const { user, loading, login } = useAuth();
