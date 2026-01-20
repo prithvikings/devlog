@@ -8,7 +8,7 @@ import ExtensionCTA from "../components/Landing/ExtensionCTA";
 import InstallationSteps from "../components/Landing/InstallationSteps";
 import Features from "../components/Landing/Features";
 import Audience from "../components/Landing/Audience";
-import FAQ from "../components/Landing/FAQ";
+import FAQ from "../components/Landing/Faq";
 import Footer from "../components/Landing/Footer";
 
 export default function LandingPage() {
