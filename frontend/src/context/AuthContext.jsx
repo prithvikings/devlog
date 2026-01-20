@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // This call now goes to localhost:5173/auth/me -> Proxy -> localhost:8002/auth/me
     api
       .get("/auth/me")
       .then(({ data }) => setUser(data))
@@ -17,7 +16,6 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = () => {
-    // Relative path. Browser stays on 5173. Vite forwards to 8002.
     window.location.href = "/auth/github";
   };
 
