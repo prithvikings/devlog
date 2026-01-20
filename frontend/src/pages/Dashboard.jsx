@@ -20,6 +20,16 @@ import {
   Maximize2,
   ListFilter,
   Loader2,
+  MessageCircle,
+  Heart,
+  Repeat,
+  Share,
+  MoreHorizontal,
+  ThumbsUp,
+  MessageSquare,
+  Send,
+  Globe,
+  BarChart2,
 } from "lucide-react";
 
 // --- Custom Scrollbar Styles (Refined for "Linear" look) ---
@@ -56,6 +66,140 @@ const globalStyles = `
 
 // --- Components ---
 
+const TwitterPreview = ({ user, content, setContent }) => {
+  return (
+    <div className="w-full max-w-[700px] mx-auto bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 shadow-sm">
+      <div className="flex gap-3">
+        {/* Avatar */}
+        <div className="size-10 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center shrink-0">
+          <span className="font-bold text-sm text-zinc-500">
+            {user?.username?.[0]?.toUpperCase() || "D"}
+          </span>
+        </div>
+
+        <div className="flex-1 min-w-0">
+          {/* Header */}
+          <div className="flex items-center gap-1 text-[15px]">
+            <span className="font-bold text-zinc-900 dark:text-white truncate">
+              {user?.username || "Developer"}
+            </span>
+            <span className="text-zinc-500 truncate">
+              @{user?.username || "dev"}
+            </span>
+            <span className="text-zinc-500">·</span>
+            <span className="text-zinc-500">1m</span>
+          </div>
+
+          {/* Editor Area */}
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="What is happening?!"
+            // CHANGE HERE: Added 'custom-scrollbar' and changed 'overflow-hidden' to 'overflow-y-auto'
+            className="w-full outline-none bg-transparent border-none focus:ring-0 p-0 mt-4 text-[15px] leading-normal placeholder:text-zinc-500 text-zinc-900 dark:text-zinc-100 resize-none min-h-[120px] custom-scrollbar overflow-y-auto"
+            style={{ fieldSizing: "content" }}
+          />
+
+          {/* Twitter Footer Actions */}
+          <div className="flex justify-between items-center mt-3 text-zinc-500 max-w-[400px]">
+            {/* ... (rest of the footer icons remain the same) ... */}
+            <div className="group flex items-center gap-1 cursor-pointer hover:text-sky-500">
+              <div className="p-2 group-hover:bg-sky-500/10 rounded-full transition-colors">
+                <MessageCircle className="size-[18px]" />
+              </div>
+              <span className="text-xs"></span>
+            </div>
+            <div className="group flex items-center gap-1 cursor-pointer hover:text-green-500">
+              <div className="p-2 group-hover:bg-green-500/10 rounded-full transition-colors">
+                <Repeat className="size-[18px]" />
+              </div>
+            </div>
+            <div className="group flex items-center gap-1 cursor-pointer hover:text-pink-500">
+              <div className="p-2 group-hover:bg-pink-500/10 rounded-full transition-colors">
+                <Heart className="size-[18px]" />
+              </div>
+            </div>
+            <div className="group flex items-center gap-1 cursor-pointer hover:text-sky-500">
+              <div className="p-2 group-hover:bg-sky-500/10 rounded-full transition-colors">
+                <BarChart2 className="size-[18px]" />
+              </div>
+            </div>
+            <div className="group flex items-center gap-1 cursor-pointer hover:text-sky-500">
+              <div className="p-2 group-hover:bg-sky-500/10 rounded-full transition-colors">
+                <Share className="size-[18px]" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const LinkedInPreview = ({ user, content, setContent }) => {
+  return (
+    <div className="w-full max-w-[550px] mx-auto bg-white dark:bg-[#1b1f23] border border-zinc-200 dark:border-zinc-700/50 rounded-lg shadow-sm overflow-hidden font-sans">
+      {/* Header */}
+      <div className="flex gap-3 p-3 pb-1">
+        <div className="size-12 rounded-full bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center shrink-0">
+          <span className="font-bold text-sm text-zinc-500 dark:text-zinc-300">
+            {user?.username?.[0]?.toUpperCase() || "D"}
+          </span>
+        </div>
+        <div className="flex-1">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-zinc-900 dark:text-white hover:text-blue-600 hover:underline cursor-pointer">
+              {user?.username || "Developer"}
+            </h3>
+            <MoreHorizontal className="size-5 text-zinc-500" />
+          </div>
+          <p className="text-xs text-zinc-500 truncate">Software Engineer</p>
+          <div className="flex items-center gap-1 text-xs text-zinc-500">
+            <span>Now</span>
+            <span>•</span>
+            <Globe className="size-3" />
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="px-4 py-2">
+        <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="What do you want to talk about?"
+          // CHANGE HERE: Added 'custom-scrollbar'
+          className="w-full bg-transparent outline-none border-none focus:ring-0 p-0 mt-4 text-sm leading-relaxed placeholder:text-zinc-500 text-zinc-900 dark:text-zinc-100 resize-none min-h-[150px] custom-scrollbar"
+          spellCheck="false"
+        />
+      </div>
+
+      {/* Footer Stats Mockup... (rest of the component remains the same) */}
+      <div className="px-4 py-2 border-t border-zinc-100 dark:border-zinc-800">
+        <div className="flex justify-between items-center py-1">
+          <div className="flex gap-4 w-full">
+            <button className="flex items-center gap-1.5 px-2 py-3 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors flex-1 justify-center text-zinc-500 dark:text-zinc-400">
+              <ThumbsUp className="size-5 -scale-x-100" />
+              <span className="text-sm font-medium">Like</span>
+            </button>
+            <button className="flex items-center gap-1.5 px-2 py-3 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors flex-1 justify-center text-zinc-500 dark:text-zinc-400">
+              <MessageSquare className="size-5" />
+              <span className="text-sm font-medium">Comment</span>
+            </button>
+            <button className="flex items-center gap-1.5 px-2 py-3 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors flex-1 justify-center text-zinc-500 dark:text-zinc-400">
+              <Repeat className="size-5" />
+              <span className="text-sm font-medium">Repost</span>
+            </button>
+            <button className="flex items-center gap-1.5 px-2 py-3 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors flex-1 justify-center text-zinc-500 dark:text-zinc-400">
+              <Send className="size-5" />
+              <span className="text-sm font-medium">Send</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 const CircularProgress = ({ value, max, size = 16, strokeWidth = 2 }) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
@@ -242,7 +386,7 @@ export default function Dashboard() {
     try {
       const selectedTone = customTone || tone;
       const selectedItems = combinedActivity.filter((item) =>
-        selectedIndices.has(item.id)
+        selectedIndices.has(item.id),
       );
 
       const submissionData = {
@@ -596,41 +740,54 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Editor Area */}
-          <div className="flex-1 relative group">
-            <textarea
-              value={generatedContent}
-              onChange={(e) => setGeneratedContent(e.target.value)}
-              className="
-                w-full h-full p-8 lg:p-12 resize-none 
-                bg-transparent border-none outline-none 
-                text-sm leading-7 font-poppins text-zinc-800 dark:text-zinc-200 
-                placeholder:text-zinc-300 dark:placeholder:text-zinc-800 
-                custom-scrollbar
-              "
-              placeholder="// Select activity and click Generate..."
-              spellCheck="false"
-            />
+          {/* Editor Area - Conditionally Rendered */}
+          <div className="flex-1 overflow-y-auto p-4 lg:p-8 flex items-center justify-center bg-zinc-50/50 dark:bg-black/50 custom-scrollbar relative">
+            {/* Background decoration for "Preview" feel */}
+            <div
+              className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
+              style={{
+                backgroundImage: `radial-gradient(#a1a1aa 1px, transparent 1px)`,
+                backgroundSize: "24px 24px",
+              }}
+            ></div>
 
+            <div className="w-full z-0">
+              {platform === "twitter" ? (
+                <TwitterPreview
+                  user={user}
+                  content={generatedContent}
+                  setContent={setGeneratedContent}
+                />
+              ) : (
+                <LinkedInPreview
+                  user={user}
+                  content={generatedContent}
+                  setContent={setGeneratedContent}
+                />
+              )}
+            </div>
+
+            {/* Floating Action Buttons */}
             {generatedContent && (
-              <div className="absolute bottom-8 right-8 z-10">
+              <div className="absolute bottom-8 right-8 z-20 flex gap-2">
                 <button
                   onClick={handleCopy}
                   className="
-                    flex items-center gap-2 px-4 py-2 rounded-full 
-                    bg-zinc-900 dark:bg-white text-white dark:text-black 
-                    shadow-lg hover:shadow-xl hover:-translate-y-0.5 
-                    active:translate-y-0 active:scale-95 
-                    transition-all duration-200 cursor-pointer
-                  "
+                  flex items-center gap-2 px-4 py-2.5 rounded-full 
+                  bg-zinc-900 dark:bg-white text-white dark:text-black 
+                  shadow-xl hover:-translate-y-0.5 
+                  active:translate-y-0 active:scale-95 
+                  transition-all duration-200 cursor-pointer
+                  border border-zinc-800 dark:border-zinc-200
+                "
                 >
                   {copied ? (
                     <Check className="size-3.5" />
                   ) : (
                     <Copy className="size-3.5" />
                   )}
-                  <span className="text-xs font-medium">
-                    {copied ? "Copied" : "Copy Text"}
+                  <span className="text-xs font-bold">
+                    {copied ? "Copied" : "Copy"}
                   </span>
                 </button>
               </div>

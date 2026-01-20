@@ -4,63 +4,66 @@ import {
   GHOSTWRITER_SYSTEM_PROMPT,
 } from "../utils/prompts.js";
 
-// Initialize Gemini
+// Use 1.5-flash for higher rate limits
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const model = genAI.getGenerativeModel({
+  model: "gemini-3-flash-preview",
+  generationConfig: { responseMimeType: "application/json" }, // Force JSON output
+});
 
-/**
- * Step 1: Convert raw GitHub JSON into a technical summary
- */
-const generateTechnicalSummary = async (activityData) => {
-  const prompt = `
-  ${TECH_ANALYST_SYSTEM_PROMPT}
-  
-  RAW DATA:
-  ${JSON.stringify(activityData, null, 2)}
-  `;
-
-  try {
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    return response.text();
-  } catch (error) {
-    console.error("AI Summary Error:", error);
-    return "Updated some files."; // Fallback
-  }
-};
-
-/**
- * Step 2: Convert technical summary into a social post
- */
 export const generateSocialPost = async (
   activityData,
   platform = "twitter",
-  tone = "casual"
+  tone = "casual",
 ) => {
-  // 1. Get the facts first
-  const technicalSummary = await generateTechnicalSummary(activityData);
+  // MERGED PROMPT: We ask for both the analysis AND the post in one go.
+  const combinedPrompt = `
+  You are an AI pipeline for DevLog. Perform two steps.
 
-  // 2. Draft the post
-  const prompt = `
+  ### STEP 1: ANALYZE (The Tech Lead)
+  ${TECH_ANALYST_SYSTEM_PROMPT}
+
+  ### STEP 2: WRITE POST (The Ghostwriter)
   ${GHOSTWRITER_SYSTEM_PROMPT}
 
-  CONTEXT:
-  - Platform: ${platform}
-  - Tone: ${tone}
-  - Work Done: ${technicalSummary}
+  ---
+  
+  ### INPUT CONTEXT:
+  - **Raw Activity Data**: ${JSON.stringify(activityData)}
+  - **Target Platform**: ${platform}
+  - **Target Tone**: ${tone}
 
-  Generate the post text only. No preamble.
+  ### OUTPUT INSTRUCTIONS:
+  Return a valid JSON object with exactly two keys:
+  {
+    "technical_summary": "The concise 2-sentence technical summary",
+    "social_post": "The final generated post text based on the summary"
+  }
   `;
 
   try {
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(combinedPrompt);
     const response = await result.response;
+    const jsonResponse = JSON.parse(response.text());
+
     return {
-      summary: technicalSummary,
-      post: response.text().trim(),
+      summary: jsonResponse.technical_summary,
+      post: jsonResponse.social_post,
     };
   } catch (error) {
     console.error("AI Generation Error:", error);
-    throw new Error("Failed to generate post.");
+
+    // Graceful degradation if API fails
+    if (error.message.includes("429")) {
+      throw new Error(
+        "AI is currently overloaded. Please try again in 30 seconds.",
+      );
+    }
+
+    // Fallback if parsing fails
+    return {
+      summary: "Analyzed daily activity.",
+      post: "Just checking in! #coding",
+    };
   }
 };
