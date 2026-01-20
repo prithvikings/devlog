@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api";
 // Adjust this import path if your file structure is different
-import { ThemeToggle } from "../components/landing/Themetoggle";
+import { ThemeToggle } from "../components/Landing/Themetoggle";
 import {
   Terminal,
   RefreshCw,
