@@ -23,7 +23,7 @@ const configurePassport = (passport) => {
       {
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: "http://localhost:8002/auth/github/callback",
+        callbackURL: process.env.CALLBACK_URL + "/auth/github/callback",
         scope: ["read:user", "repo"],
       },
       async (accessToken, refreshToken, profile, done) => {
@@ -50,8 +50,8 @@ const configurePassport = (passport) => {
         } catch (err) {
           return done(err, null);
         }
-      }
-    )
+      },
+    ),
   );
 };
 
