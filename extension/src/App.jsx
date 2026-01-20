@@ -272,7 +272,7 @@ export default function Popup() {
           <Terminal className="size-6 text-zinc-900 dark:text-white" />
         </div>
         <h2 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
-          DevLog AI
+          DevPostGen AI
         </h2>
         <p className="text-sm text-zinc-500 text-center mb-8 max-w-[260px] leading-relaxed">
           Your engineering diary, automated. <br /> Connect GitHub to start.
@@ -308,7 +308,9 @@ export default function Popup() {
           <div className="flex size-7 items-center justify-center rounded-md bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-sm">
             <Terminal className="size-4" />
           </div>
-          <span className="text-sm font-semibold tracking-tight">DevLog</span>
+          <span className="text-sm font-semibold tracking-tight">
+            DevPostGen
+          </span>
         </div>
         <div className="flex items-center gap-2.5 bg-zinc-100 dark:bg-zinc-800 py-1 pl-2.5 pr-1 rounded-full border border-zinc-200 dark:border-zinc-700/50">
           <span className="text-[10px] font-semibold text-zinc-600 dark:text-zinc-300 truncate max-w-[80px]">

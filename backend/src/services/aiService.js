@@ -18,7 +18,7 @@ export const generateSocialPost = async (
 ) => {
   // MERGED PROMPT: We ask for both the analysis AND the post in one go.
   const combinedPrompt = `
-  You are an AI pipeline for DevLog. Perform two steps.
+  You are an AI pipeline for DevPostGen. Perform two steps.
 
   ### STEP 1: ANALYZE (The Tech Lead)
   ${TECH_ANALYST_SYSTEM_PROMPT}

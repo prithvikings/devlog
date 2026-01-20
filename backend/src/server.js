@@ -62,7 +62,7 @@ app.use(
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
     },
-  })
+  }),
 );
 
 // 4. Passport Middleware
@@ -72,7 +72,7 @@ app.use(passport.session());
 
 // 5. Routes
 app.get("/", (req, res) => {
-  res.send("DevLog API (Manual Headers) is running...");
+  res.send("DevPostGen API (Manual Headers) is running...");
 });
 app.use("/auth", authRoutes);
 app.use("/api/posts", postRoutes);

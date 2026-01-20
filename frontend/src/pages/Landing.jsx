@@ -762,7 +762,7 @@ const FAQ = () => {
           Frequently Asked Questions
         </h2>
         <p className="text-xs text-zinc-600 dark:text-zinc-500 leading-relaxed font-poppins">
-          Here are some common questions about DevLog AI.
+          Here are some common questions about DevPostGen AI.
         </p>
       </div>
       <div className="rounded-lg border border-zinc-200 dark:border-white/5 bg-zinc-50/50 dark:bg-white/[0.02] px-6">
@@ -791,7 +791,7 @@ const Footer = () => (
         <div className="flex items-center gap-2">
           <img src="./terminal.png" alt="" className="size-8" />
           <span className="font-semibold tracking-tight text-zinc-900 dark:text-white">
-            DevLog AI
+            DevPostGen AI
           </span>
         </div>
         <p className="text-xs text-zinc-600 dark:text-zinc-500 max-w-xs leading-relaxed font-poppins">
@@ -852,7 +852,7 @@ const Footer = () => (
     </div>
 
     <div className="max-w-5xl mx-auto px-6 mt-12 flex items-center justify-between">
-      <p className="text-[10px] text-zinc-400">© 2024 DevLog Inc.</p>
+      <p className="text-[10px] text-zinc-400">© 2024 DevPostGen Inc.</p>
       <div className="flex items-center gap-2">
         <div className="w-2 h-2 rounded-full bg-green-500" />
         <span className="text-[10px] text-zinc-500 font-mono">

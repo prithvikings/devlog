@@ -1,4 +1,4 @@
-# DevLog Frontend
+# DevPostGen Frontend
 
 A modern, high-performance web application built for seamless developer logging and management.
 

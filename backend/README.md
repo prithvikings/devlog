@@ -1,6 +1,6 @@
-# DevLog Backend
+# DevPostGen Backend
 
-A robust Node.js API serving as the backbone for the DevLog ecosystem, handling authentication, data persistence, and AI-powered insights.
+A robust Node.js API serving as the backbone for the DevPostGen ecosystem, handling authentication, data persistence, and AI-powered insights.
 
 ## 🚀 Tech Stack
 
@@ -88,6 +88,6 @@ The server defaults to port `8002`.
 
 ### Posts
 
-- `GET /api/posts`: Fetch all devlogs.
-- `POST /api/posts`: Create a new devlog entry.
-- `DELETE /api/posts/:id`: Delete a specific devlog.
+- `GET /api/posts`: Fetch all DevPostGens.
+- `POST /api/posts`: Create a new DevPostGen entry.
+- `DELETE /api/posts/:id`: Delete a specific DevPostGen.

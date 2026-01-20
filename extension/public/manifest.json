@@ -1,13 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "DevLog AI",
+  "name": "DevPostGen AI",
   "version": "1.0.0",
   "description": "Turn code into content. Zero friction.",
   "permissions": ["storage", "cookies"],
   "host_permissions": ["http://localhost:8000/*", "http://localhost:8002/*"],
   "action": {
     "default_popup": "index.html",
-    "default_title": "DevLog AI",
+    "default_title": "DevPostGen AI",
     "default_icon": {
       "16": "terminal.png",
       "48": "terminal.png",

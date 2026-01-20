@@ -1,6 +1,6 @@
-# DevLog: Turn Code into Content 🚀
+# DevPostGen: Turn Code into Content 🚀
 
-**DevLog** is a comprehensive ecosystem designed for developers to effortlessly track their daily progress and transform their coding activity into engaging social media content. Whether it's a GitHub commit or a LeetCode problem solved, DevLog uses AI to help you build your personal brand with zero friction.
+**DevPostGen** is a comprehensive ecosystem designed for developers to effortlessly track their daily progress and transform their coding activity into engaging social media content. Whether it's a GitHub commit or a LeetCode problem solved, DevPostGen uses AI to help you build your personal brand with zero friction.
 
 ---
 
@@ -19,7 +19,7 @@ A robust Node.js & Express API that handles the heavy lifting.
 
 ### 2. [Frontend](./frontend) (The Hub)
 
-A high-performance React 19 dashboard for managing your DevLog presence.
+A high-performance React 19 dashboard for managing your DevPostGen presence.
 
 - **Tech:** Vite, Tailwind CSS 4, Radix UI, and Motion.
 - **Features:** A sleek landing page, protected dashboard, and detailed activity tracking.
@@ -51,8 +51,8 @@ A Chrome Extension that lives in your browser for instant updates.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/devlog.git
-cd devlog
+git clone https://github.com/yourusername/DevPostGen.git
+cd DevPostGen
 ```
 
 ### 2. Setup the Backend
@@ -82,14 +82,14 @@ cd devlog
 - **Automated Logging:** Stops the "what did I do today?" struggle by pulling data directly from your sources.
 - **Tone Personalization:** Let the AI match your voice, from professional technical breakdowns to high-energy "hype" posts.
 - **Developer First:** Built with a "dark-mode first" philosophy and a focus on speed and minimal friction.
-- **Cross-Platform:** Write once, publish everywhere (Twitter, LinkedIn, and the DevLog Dashboard).
+- **Cross-Platform:** Write once, publish everywhere (Twitter, LinkedIn, and the DevPostGen Dashboard).
 
 ---
 
 ## 📁 Repository Structure
 
 ```text
-devlog/
+DevPostGen/
 ├── backend/    # Express API, AI logic, and Database models
 ├── frontend/   # Main web application dashboard
 └── extension/  # Chrome Extension for quick-access drafting

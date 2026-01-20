@@ -1,15 +1,15 @@
-# DevLog AI Extension
+# DevPostGen AI Extension
 
 A lightweight, powerful Chrome extension that turns your coding activity into engaging social media content.
 
 ## 🚀 Overview
 
-The DevLog AI Extension bridges the gap between your development workflow and your social presence. By syncing with your GitHub commits and LeetCode submissions, it uses AI to draft perfectly tailored updates for Twitter and LinkedIn.
+The DevPostGen AI Extension bridges the gap between your development workflow and your social presence. By syncing with your GitHub commits and LeetCode submissions, it uses AI to draft perfectly tailored updates for Twitter and LinkedIn.
 
 ## ✨ Features
 
 - **Activity Sync:** Instantly fetch your latest GitHub commits and LeetCode solved problems.
-- **AI Content Generator:** Leverages Google Gemini (via the DevLog backend) to draft high-quality posts.
+- **AI Content Generator:** Leverages Google Gemini (via the DevPostGen backend) to draft high-quality posts.
 - **Customizable Tones:** Choose between _Technical_, _Casual_, or _Hype_ to match your personal brand.
 - **Platform Optimization:** Tailors content specifically for Twitter or LinkedIn formats.
 - **State Persistence:** Remembers your activity and drafts even after closing the popup using `chrome.storage`.
@@ -35,7 +35,7 @@ extension/
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/)
-- The [DevLog Backend](../backend) must be running on `http://localhost:8002`.
+- The [DevPostGen Backend](../backend) must be running on `http://localhost:8002`.
 
 ### Setup
 
@@ -57,7 +57,7 @@ extension/
 
 ## 📡 Backend Integration
 
-The extension communicates with the DevLog backend for:
+The extension communicates with the DevPostGen backend for:
 
 - **Authentication:** `GET /auth/github`
 - **Activity Data:** `GET /api/posts/activity` (GitHub) & `GET /api/posts/leetcode`
