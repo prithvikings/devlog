@@ -5,7 +5,8 @@ import { Download } from "lucide-react";
 import BrowserMockup from "./BrowserMockup";
 
 const ExtensionCTA = () => {
-  const GOOGLE_DRIVE_LINK = "YOUR_GOOGLE_DRIVE_LINK_HERE";
+  const GOOGLE_DRIVE_LINK =
+    "https://drive.google.com/drive/folders/19jUL9C3k8C6UJTCe9vlhnnFW6E314hPJ?usp=sharing";
 
   const handleDownload = () => {
     window.open(GOOGLE_DRIVE_LINK, "_blank");

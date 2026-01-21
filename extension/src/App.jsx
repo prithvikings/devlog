@@ -48,7 +48,7 @@ const globalStyles = `
 `;
 
 const api = axios.create({
-  baseURL: "http://localhost:8002",
+  baseURL: "https://devpostgen-backend.onrender.com",
   withCredentials: true,
 });
 
@@ -236,7 +236,7 @@ export default function Popup() {
   };
 
   const handleLogin = () => {
-    const url = "http://localhost:8002/auth/github";
+    const url = "https://devpostgen-backend.onrender.com/auth/github";
     if (typeof chrome !== "undefined" && chrome.tabs)
       chrome.tabs.create({ url });
     else window.location.href = url;
