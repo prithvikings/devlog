@@ -10,11 +10,18 @@ import Features from "../components/landing/Features";
 import Audience from "../components/landing/Audience";
 import FAQ from "../components/landing/Faq";
 import Footer from "../components/landing/Footer";
+import LandingSkeleton from "../components/Skeltons/LandingSkeleton";
 
 export default function LandingPage() {
   const { user, loading, login } = useAuth();
-  if (loading) return null;
-  if (user) return <Navigate to="/dashboard" replace />;
+
+  if (loading) {
+    return <LandingSkeleton />;
+  }
+
+  if (user) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <div
